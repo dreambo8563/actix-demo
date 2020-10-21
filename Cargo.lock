@@ -731,7 +731,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "hello-world"
+name = "hello_world"
 version = "0.1.0"
 dependencies = [
  "actix-web",
