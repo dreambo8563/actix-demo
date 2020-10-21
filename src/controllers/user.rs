@@ -24,6 +24,7 @@ impl Responder for MyObj {
 }
 #[get("")]
 pub async fn index() -> impl Responder {
+    info!("enter the user index");
     MyObj {
         name: "user",
         age: 88,
