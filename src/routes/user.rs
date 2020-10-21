@@ -16,7 +16,8 @@ fn routes_v2(cfg: &mut web::ServiceConfig) {
     cfg.service(
         web::scope("/v2/user")
             .guard(guard::Header("xx", "users.rust-lang.org"))
-            .service(controllers::user::index),
+            .service(controllers::user::index)
+            .service(controllers::user::friend),
     );
 }
 

@@ -1,6 +1,6 @@
-use actix_web::{get, Error, HttpRequest, HttpResponse, Responder};
+use actix_web::{get, web, Error, HttpRequest, HttpResponse, Responder, Result};
 use futures::future::{ready, Ready};
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 
 #[derive(Serialize)]
 struct MyObj {
@@ -29,4 +29,23 @@ pub async fn index() -> impl Responder {
         name: "user",
         age: 88,
     }
+}
+
+#[derive(Deserialize)]
+pub struct Info {
+    user_id: u32,
+    friend: String,
+}
+
+#[derive(Deserialize)]
+pub struct Name {
+    name: String,
+}
+
+#[get("/{user_id}/{friend}")]
+pub async fn friend(info: web::Path<Info>, query: web::Query<Name>) -> Result<String> {
+    Ok(format!(
+        "Welcome {}, user_id {}, name: {}!",
+        info.friend, info.user_id, query.name
+    ))
 }
