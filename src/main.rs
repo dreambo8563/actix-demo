@@ -1,14 +1,19 @@
+extern crate log;
+
 use actix_web::{web, App, HttpResponse, HttpServer};
 use listenfd::ListenFd;
 
+mod controllers;
 mod routes;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
+    std::env::set_var("RUST_LOG", "actix_web=info");
+    env_logger::init();
     let mut listenfd = ListenFd::from_env();
     let mut server = HttpServer::new(|| {
         App::new()
-            .configure(routes::user::user_routes)
+            .configure(routes::user::routes)
             // default route
             .default_service(web::to(|| HttpResponse::NotFound()))
     });

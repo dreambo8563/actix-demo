@@ -1,3 +1,4 @@
+use crate::controllers;
 use actix_web::{get, guard, web, Responder};
 
 #[get("/user")]
@@ -6,21 +7,21 @@ async fn name() -> impl Responder {
 }
 
 // this function could be located in a different module
-fn user_routes_v1(cfg: &mut web::ServiceConfig) {
-    cfg.service(web::scope("/v1").service(name));
+fn routes_v1(cfg: &mut web::ServiceConfig) {
+    cfg.service(web::scope("/v1/user").service(name));
 }
 
 // this function could be located in a different module
-fn user_routes_v2(cfg: &mut web::ServiceConfig) {
+fn routes_v2(cfg: &mut web::ServiceConfig) {
     cfg.service(
-        web::scope("/v2")
+        web::scope("/v2/user")
             .guard(guard::Header("xx", "users.rust-lang.org"))
-            .service(name),
+            .service(controllers::user::index),
     );
 }
 
 // this function could be located in a different module
-pub fn user_routes(cfg: &mut web::ServiceConfig) {
-    user_routes_v1(cfg);
-    user_routes_v2(cfg);
+pub fn routes(cfg: &mut web::ServiceConfig) {
+    routes_v1(cfg);
+    routes_v2(cfg);
 }
