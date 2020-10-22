@@ -7,8 +7,8 @@ mod controllers;
 mod routes;
 
 #[derive(Serialize)]
-struct MyObj {
-    message: String,
+struct MyObj<'a> {
+    message: &'a str,
 }
 
 #[actix_web::main]
@@ -23,11 +23,11 @@ async fn main() -> std::io::Result<()> {
                     // <- create custom error response
                     // 定制 QueryConfig 的错误
                     debug!("{:?}", &err);
-                    let msg = err.to_string();
+                    // let msg = err.to_string();
                     error::InternalError::from_response(
-                        err,
+                        "error",
                         HttpResponse::Ok().json(MyObj {
-                            message: format!("{}", msg),
+                            message: format!("{}", err).as_str(),
                         }),
                     )
                     .into()
