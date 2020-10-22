@@ -496,6 +496,19 @@ dependencies = [
 ]
 
 [[package]]
+name = "demo"
+version = "0.1.0"
+dependencies = [
+ "actix-web",
+ "env_logger",
+ "futures",
+ "listenfd",
+ "log",
+ "serde",
+ "serde_json",
+]
+
+[[package]]
 name = "derive_more"
 version = "0.99.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -764,19 +777,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "20564e78d53d2bb135c343b3f47714a56af2061f1c928fdb541dc7b9fdd94205"
 dependencies = [
  "unicode-segmentation",
-]
-
-[[package]]
-name = "hello_world"
-version = "0.1.0"
-dependencies = [
- "actix-web",
- "env_logger",
- "futures",
- "listenfd",
- "log",
- "serde",
- "serde_json",
 ]
 
 [[package]]
