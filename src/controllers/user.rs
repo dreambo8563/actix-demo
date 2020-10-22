@@ -1,6 +1,5 @@
-use actix_web::{get, web, Responder, Result};
-// use futures::future::{ready, Ready};
 use crate::utils::wrapper::res_success;
+use actix_web::{get, web, Responder, Result};
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize)]
@@ -8,21 +7,6 @@ struct MyObj {
     name: &'static str,
     age: u32,
 }
-
-// Responder
-// impl Responder for MyObj {
-//     type Error = Error;
-//     type Future = Ready<Result<HttpResponse, Error>>;
-
-//     fn respond_to(self, _req: &HttpRequest) -> Self::Future {
-//         let body = serde_json::to_string(&self).unwrap();
-
-//         // Create response and set content type
-//         ready(Ok(HttpResponse::Ok()
-//             .content_type("application/json")
-//             .body(body)))
-//     }
-// }
 
 #[get("")]
 pub async fn index() -> impl Responder {

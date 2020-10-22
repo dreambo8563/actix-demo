@@ -1,4 +1,4 @@
-use actix_web::{web, App, HttpResponse, HttpServer};
+use actix_web::{App, HttpServer};
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
@@ -6,10 +6,10 @@ async fn main() -> std::io::Result<()> {
     // info!("start");
     HttpServer::new(|| {
         App::new()
-            .app_data(demo::extractors_config())
+            .app_data(demo::query_config())
             .configure(demo::routes_config)
             // default route
-            .default_service(web::to(|| HttpResponse::NotFound()))
+            .default_service(demo::default_route())
     })
     .bind("127.0.0.1:8080")?
     .run()
