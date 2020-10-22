@@ -4,6 +4,7 @@ use actix_web::{error, web, HttpResponse};
 use serde::Serialize;
 mod controllers;
 mod routes;
+mod utils;
 
 #[derive(Serialize)]
 struct MyObj<'a> {
