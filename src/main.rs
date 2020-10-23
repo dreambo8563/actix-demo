@@ -2,7 +2,9 @@ use actix_web::{App, HttpServer};
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    demo::init_log();
+    demo::init();
+    let s: demo::settings::Settings = demo::settings::Settings::new().unwrap();
+    println!("{:?}", s.sparkpost);
     // info!("start");
     HttpServer::new(|| {
         App::new()

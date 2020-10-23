@@ -5,9 +5,10 @@ use actix_web::{web, HttpResponse, Route};
 mod controllers;
 mod errors;
 mod routes;
+pub mod settings;
 mod utils;
 
-pub fn init_log() {
+pub fn init() {
     env_logger::init();
 }
 
