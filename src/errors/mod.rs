@@ -5,7 +5,7 @@ use serde::Serialize;
 
 #[derive(Serialize)]
 struct CommonErr<'a> {
-    message: &'a str,
+    err: &'a str,
 }
 
 #[derive(Debug, Display, Error)]
@@ -18,7 +18,7 @@ impl error::ResponseError for MyError {
         match &self {
             MyError::BadRequestData(e) => {
                 HttpResponseBuilder::new(self.status_code()).json(CommonErr {
-                    message: format!("{}", e).as_str(),
+                    err: format!("{}", e).as_str(),
                 })
             }
         }
