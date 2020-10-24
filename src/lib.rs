@@ -7,8 +7,8 @@ extern crate actix_web;
 mod controllers;
 mod errors;
 mod routes;
-mod settings;
 mod utils;
+use utils::settings;
 
 use actix_web::{web, HttpResponse, Route};
 
