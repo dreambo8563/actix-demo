@@ -1,6 +1,4 @@
 use config::{Config, ConfigError, Environment, File};
-
-use log::{debug, info};
 use serde::Deserialize;
 use std::env;
 

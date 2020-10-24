@@ -1,5 +1,5 @@
 use crate::controllers;
-use actix_web::{get, guard, web, Responder};
+use actix_web::{guard, web, Responder};
 
 #[get("/user")]
 async fn name() -> impl Responder {

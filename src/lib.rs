@@ -1,3 +1,9 @@
+#[macro_use]
+extern crate log;
+#[macro_use]
+extern crate actix_web;
+// global import macro in the crate
+
 mod controllers;
 mod errors;
 mod routes;
