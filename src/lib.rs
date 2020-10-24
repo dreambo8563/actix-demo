@@ -1,12 +1,12 @@
-#[macro_use]
-extern crate log;
-use actix_web::{web, HttpResponse, Route};
-
 mod controllers;
 mod errors;
 mod routes;
-pub mod settings;
+mod settings;
 mod utils;
+
+use actix_web::{web, HttpResponse, Route};
+
+pub use settings::Settings;
 
 pub fn init() {
     env_logger::init();

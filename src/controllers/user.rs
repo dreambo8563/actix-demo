@@ -1,5 +1,6 @@
 use crate::utils::wrapper::res_success;
 use actix_web::{get, web, Responder, Result};
+use log::info;
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize)]

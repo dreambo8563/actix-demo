@@ -1,10 +1,13 @@
 use config::{Config, ConfigError, Environment, File};
+
+use log::{debug, info};
 use serde::Deserialize;
 use std::env;
 
 #[derive(Debug, Deserialize)]
 pub struct Database {
     url: String,
+    echo: bool,
 }
 
 #[derive(Debug, Deserialize)]
@@ -49,6 +52,7 @@ impl Settings {
         // Default to 'development' env
         // Note that this file is _optional_
         let env = env::var("RUN_MODE").unwrap_or_else(|_| "development".into());
+        debug!("env:{}", env);
         s.merge(File::with_name(&format!("config/{}", env)).required(false))?;
 
         // Add in a local configuration file

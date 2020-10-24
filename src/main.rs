@@ -1,10 +1,17 @@
 use actix_web::{App, HttpServer};
+use demo::Settings;
+use lazy_static::lazy_static;
+use log::info;
+
+lazy_static! {
+    static ref ENV: Settings = Settings::new().unwrap();
+}
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     demo::init();
-    let s: demo::settings::Settings = demo::settings::Settings::new().unwrap();
-    println!("{:?}", s.sparkpost);
+    // let s: demo::settings::Settings = demo::settings::Settings::new().unwrap();
+    info!("{:?}", ENV.database);
     // info!("start");
     HttpServer::new(|| {
         App::new()
