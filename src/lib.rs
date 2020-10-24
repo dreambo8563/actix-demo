@@ -2,17 +2,23 @@
 extern crate log;
 #[macro_use]
 extern crate actix_web;
+
+// #[macro_use]
+// extern crate slog;
 // global import macro in the crate
 
 mod controllers;
 mod errors;
 mod routes;
 mod utils;
+// use utils::logger;
 use utils::settings;
 
 use actix_web::{web, HttpResponse, Route};
 
 pub use settings::Settings;
+pub use utils::ENV;
+pub use utils::LOGGING;
 
 pub fn init() {
     env_logger::init();

@@ -1,18 +1,16 @@
 use actix_web::{App, HttpServer};
-use demo::Settings;
-use lazy_static::lazy_static;
+use demo::ENV;
+use demo::LOGGING;
 use log::info;
-
-lazy_static! {
-    static ref ENV: Settings = Settings::new().unwrap();
-}
+use slog::warn;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     demo::init();
-    // let s: demo::settings::Settings = demo::settings::Settings::new().unwrap();
     info!("{:?}", ENV.database);
-    // info!("start");
+    let url = &ENV.database.url;
+    let applogger = &LOGGING.logger;
+    warn!(applogger, "Service starting"; "url" => url);
     HttpServer::new(|| {
         App::new()
             .app_data(demo::ExtractorConifg::query_config())

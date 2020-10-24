@@ -1,10 +1,11 @@
 use config::{Config, ConfigError, Environment, File};
+
 use serde::Deserialize;
 use std::env;
 
 #[derive(Debug, Deserialize)]
 pub struct Database {
-    url: String,
+    pub url: String,
     echo: bool,
 }
 
@@ -28,6 +29,17 @@ pub struct Braintree {
     public_key: String,
     private_key: String,
 }
+#[derive(Debug, Deserialize)]
+pub struct LogConfig {
+    r#type: String,
+    format: String,
+    source_location: String,
+    timezone: String,
+    pub level: String,
+    pub path: String,
+    rotate_size: u32,
+    rotate_keep: u8,
+}
 
 #[derive(Debug, Deserialize)]
 pub struct Settings {
@@ -36,6 +48,7 @@ pub struct Settings {
     pub sparkpost: Sparkpost,
     pub twitter: Twitter,
     pub braintree: Braintree,
+    pub logconfig: LogConfig,
 }
 
 impl Settings {

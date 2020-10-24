@@ -1,0 +1,1 @@
+{"msg":"Service starting","v":0,"name":"slog-rs","level":40,"time":"2020-10-25T01:09:38.617298+08:00","hostname":"vincents-MacBook-Pro.local","pid":15104,"location":"src/main.rs:13 demo","url":"postgres://"}
