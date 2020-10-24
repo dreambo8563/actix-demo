@@ -4,6 +4,11 @@ use demo::LOGGING;
 use log::info;
 use slog::warn;
 
+//FIXME: rm env_logger
+// slog is the log package
+
+//TODO: find a way to supper log rotate
+
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     demo::init();
