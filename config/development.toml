@@ -4,11 +4,10 @@ debug = true
 echo = true
 
 [logconfig]
-type = "file"
 format = "compact"
 source_location = "module_and_line"
 timezone = "local"
 level = "debug"
-path = "log/error.log"
+# path = "log/error.log"
 rotate_size = 8
 rotate_keep = 2

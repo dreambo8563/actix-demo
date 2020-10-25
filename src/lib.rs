@@ -1,5 +1,5 @@
 #[macro_use]
-extern crate log;
+extern crate slog;
 #[macro_use]
 extern crate actix_web;
 
@@ -31,6 +31,7 @@ impl Routes {
         default_route()
     }
     pub fn config(cfg: &mut web::ServiceConfig) {
+        debug!(&LOGGING.logger, "route config start");
         routes_config(cfg);
     }
 }

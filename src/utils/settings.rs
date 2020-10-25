@@ -1,5 +1,5 @@
 use config::{Config, ConfigError, Environment, File};
-
+use log::debug;
 use serde::Deserialize;
 use std::env;
 
@@ -31,14 +31,11 @@ pub struct Braintree {
 }
 #[derive(Debug, Deserialize)]
 pub struct LogConfig {
-    r#type: String,
     format: String,
     source_location: String,
     timezone: String,
     pub level: String,
-    pub path: String,
-    rotate_size: u32,
-    rotate_keep: u8,
+    pub path: Option<String>,
 }
 
 #[derive(Debug, Deserialize)]

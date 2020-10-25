@@ -1,4 +1,6 @@
 use crate::utils::wrapper::res_success;
+use crate::LOGGING;
+
 use actix_web::{web, Responder, Result};
 use serde::{Deserialize, Serialize};
 
@@ -10,7 +12,7 @@ struct MyObj {
 
 #[get("")]
 pub async fn index() -> impl Responder {
-    info!("enter the user index");
+    slog::info!(&LOGGING.logger, "enter the user index");
 
     res_success(MyObj {
         name: "user",
