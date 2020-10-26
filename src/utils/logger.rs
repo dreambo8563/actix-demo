@@ -13,7 +13,6 @@ impl Logging {
     pub fn new() -> Logger {
         let logconfig = &ENV.logconfig;
 
-        // let logfile = &logconfig.path;
         let filter_level = &logconfig.level;
         let filter_level = filter_level
             .parse::<Level>()
@@ -27,34 +26,29 @@ impl Logging {
                     .append(true)
                     .open(logfile)
                     .unwrap();
-                let applogger = Logger::root(
-                    Mutex::new(LevelFilter::new(
-                        slog_bunyan::with_name("demo App", file).build(),
-                        filter_level,
-                    ))
-                    .fuse(),
-                    o!("location" => FnValue(move |info| {
-                        format!("{}:{} {}", info.file(), info.line(), info.module())
-                        })
-                    ),
-                );
-                return applogger;
+                return create_logger(filter_level, file);
             }
             None => {
                 let output = std::io::stdout();
-                let applogger = Logger::root(
-                    Mutex::new(LevelFilter::new(
-                        slog_bunyan::with_name(&"demo App", output).build(),
-                        filter_level,
-                    ))
-                    .fuse(),
-                    o!("location" => FnValue(move |info| {
-                        format!("{}:{} {}", info.file(), info.line(), info.module())
-                        })
-                    ),
-                );
-                applogger
+                create_logger(filter_level, output)
             }
         }
     }
+}
+
+fn create_logger<T: 'static>(lv: slog::Level, dest: T) -> Logger
+where
+    T: std::io::Write + std::marker::Send,
+{
+    Logger::root(
+        Mutex::new(LevelFilter::new(
+            slog_bunyan::with_name(&"demo App", dest).build(),
+            lv,
+        ))
+        .fuse(),
+        o!("location" => FnValue(move |info| {
+            format!("{}:{} {}", info.file(), info.line(), info.module())
+            })
+        ),
+    )
 }
