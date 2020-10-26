@@ -1,6 +1,6 @@
 use actix_web::{App, HttpServer};
+use demo::logger;
 use demo::ENV;
-use demo::LOGGING;
 use slog::{info, warn};
 
 //FIXME: rm env_logger
@@ -13,9 +13,9 @@ async fn main() -> std::io::Result<()> {
     demo::init();
 
     let url = &ENV.database.url;
-    let applogger = &LOGGING.logger;
-    info!(applogger, "env"; "ENV.database"=> format!("{:?}", ENV.database));
-    warn!(applogger,"111"; "url" => url);
+
+    info!(&logger, "env"; "ENV.database"=> format!("{:?}", ENV.database));
+    warn!(&logger,"111"; "url" => url);
     HttpServer::new(|| {
         App::new()
             .app_data(demo::ExtractorConifg::query_config())

@@ -8,5 +8,5 @@ lazy_static! {
 }
 
 lazy_static! {
-    pub static ref LOGGING: logger::Logging = logger::Logging::new();
+    pub static ref LOGGING: slog::Logger = logger::Logging::new();
 }

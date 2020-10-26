@@ -18,7 +18,7 @@ use actix_web::{web, HttpResponse, Route};
 
 pub use settings::Settings;
 pub use utils::ENV;
-pub use utils::LOGGING;
+pub use utils::LOGGING as logger;
 
 pub fn init() {
     env_logger::init();
@@ -31,7 +31,7 @@ impl Routes {
         default_route()
     }
     pub fn config(cfg: &mut web::ServiceConfig) {
-        debug!(&LOGGING.logger, "route config start");
+        debug!(&logger, "route config start");
         routes_config(cfg);
     }
 }

@@ -5,13 +5,12 @@ use slog::{o, Drain, FnValue, Level, Logger};
 use std::fs::OpenOptions;
 use std::sync::Mutex;
 
-#[derive(Debug)]
 pub struct Logging {
     pub logger: Logger,
 }
 
 impl Logging {
-    pub fn new() -> Self {
+    pub fn new() -> Logger {
         let logconfig = &ENV.logconfig;
 
         // let logfile = &logconfig.path;
@@ -39,7 +38,7 @@ impl Logging {
                         })
                     ),
                 );
-                return Logging { logger: applogger };
+                return applogger;
             }
             None => {
                 let output = std::io::stdout();
@@ -54,7 +53,7 @@ impl Logging {
                         })
                     ),
                 );
-                Logging { logger: applogger }
+                applogger
             }
         }
     }
