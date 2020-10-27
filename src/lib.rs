@@ -3,7 +3,7 @@
 extern crate slog;
 #[macro_use]
 extern crate actix_web;
-
+use actix_files::Files;
 // #[macro_use]
 // extern crate slog;
 // global import macro in the crate
@@ -58,9 +58,15 @@ impl ExtractorConifg {
 /// compose route configs from all modules
 fn routes_config(cfg: &mut web::ServiceConfig) {
     routes::user::routes(cfg);
+    static_route(cfg);
 }
 
 /// default route lead to 404 page
 fn default_route() -> Route {
     web::to(|| HttpResponse::NotFound())
+}
+
+/// default route lead to 404 page
+fn static_route(cfg: &mut web::ServiceConfig) {
+    cfg.service(Files::new("/", "public/").show_files_listing());
 }
