@@ -5,6 +5,7 @@ use slog::{o, Drain, FnValue, Level, Logger};
 use std::fs::OpenOptions;
 use std::sync::Mutex;
 
+const APP_NAME: &str = "demo App";
 pub struct Logging {
     pub logger: Logger,
 }
@@ -42,7 +43,7 @@ where
 {
     Logger::root(
         Mutex::new(LevelFilter::new(
-            slog_bunyan::with_name(&"demo App", dest).build(),
+            slog_bunyan::with_name(APP_NAME, dest).build(),
             lv,
         ))
         .fuse(),
