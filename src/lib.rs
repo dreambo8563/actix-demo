@@ -3,22 +3,14 @@
 extern crate slog;
 #[macro_use]
 extern crate actix_web;
-use actix_files::Files;
-use actix_web::{App, HttpServer};
-// #[macro_use]
-// extern crate slog;
-// global import macro in the crate
-
 mod controllers;
 mod errors;
 mod routes;
 mod utils;
-// use utils::logger;
-// use utils::settings;
 
+use actix_files::Files;
 use actix_web::{web, HttpResponse, Route};
-
-// use utils::ENV;
+use actix_web::{App, HttpServer};
 use utils::LOGGING as logger;
 
 /// preparation for this app
