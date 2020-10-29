@@ -1,6 +1,6 @@
-use demo::logger;
-use demo::ENV;
-use slog::{info, warn};
+// use demo::logger;
+// use demo::ENV;
+// use slog::{info, warn};
 
 //FIXME: rm env_logger
 // slog is the log package
@@ -10,9 +10,9 @@ use slog::{info, warn};
 fn main() -> std::io::Result<()> {
     demo::init();
 
-    let url = &ENV.database.url;
+    // let url = &ENV.database.url;
 
-    info!(&logger, "env"; "ENV.database"=> format!("{:?}", ENV.database));
-    warn!(&logger,"111"; "url" => url);
+    // info!(&logger, "env"; "ENV.database"=> format!("{:?}", ENV.database));
+    // warn!(&logger,"111"; "url" => url);
     demo::run()
 }

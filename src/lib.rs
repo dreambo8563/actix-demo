@@ -18,8 +18,8 @@ mod utils;
 
 use actix_web::{web, HttpResponse, Route};
 
-pub use utils::ENV;
-pub use utils::LOGGING as logger;
+// use utils::ENV;
+use utils::LOGGING as logger;
 
 /// preparation for this app
 pub fn init() {
