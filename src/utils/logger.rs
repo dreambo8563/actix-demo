@@ -12,6 +12,7 @@ pub struct Logging {
 
 impl Logging {
     pub fn new() -> Logger {
+        //! if path includes in logconfig, log to file; otherwise, log to stdout
         let logconfig = &ENV.logconfig;
 
         let filter_level = &logconfig.level;
