@@ -1,6 +1,7 @@
 use actix_web::dev::HttpResponseBuilder;
 use actix_web::{error, http::StatusCode, HttpResponse};
 use derive_more::{Display, Error};
+use error::ResponseError;
 use serde::Serialize;
 
 #[derive(Serialize)]
@@ -13,7 +14,13 @@ pub enum MyError {
     BadRequestData(error::QueryPayloadError),
 }
 
-impl error::ResponseError for MyError {
+impl ResponseError for MyError {
+    fn status_code(&self) -> StatusCode {
+        match *self {
+            MyError::BadRequestData(_) => StatusCode::BAD_REQUEST,
+        }
+    }
+
     fn error_response(&self) -> HttpResponse {
         match &self {
             MyError::BadRequestData(e) => {
@@ -21,12 +28,6 @@ impl error::ResponseError for MyError {
                     err: format!("{}", e).as_str(),
                 })
             }
-        }
-    }
-
-    fn status_code(&self) -> StatusCode {
-        match *self {
-            MyError::BadRequestData(_) => StatusCode::BAD_REQUEST,
         }
     }
 }

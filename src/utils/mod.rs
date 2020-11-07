@@ -9,6 +9,6 @@ lazy_static! {
 }
 
 lazy_static! {
-    // singleton - logger instantce
+    // singleton - logger instance
     pub static ref LOGGING: slog::Logger = logger::Logging::new();
 }

@@ -7,7 +7,7 @@ struct SuccessResponse<T: Serialize> {
     data: T,
 }
 
-/// response wrapper to make reponse struct consistent
+/// response wrapper to make response struct consistent
 pub fn res_success<T>(res: T) -> Result<HttpResponse>
 where
     T: Serialize,
