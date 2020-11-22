@@ -33,9 +33,9 @@ impl Routes {
 }
 
 /// base struct of all the configs of Extractor
-struct ExtractorConifg;
+struct ExtractorConfig;
 
-impl ExtractorConifg {
+impl ExtractorConfig {
     /// customized config for query
     fn query_config() -> actix_web::web::QueryConfig {
         // change query extractor configuration
@@ -66,7 +66,7 @@ fn static_route(cfg: &mut web::ServiceConfig) {
 pub async fn run() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new()
-            .app_data(ExtractorConifg::query_config())
+            .app_data(ExtractorConfig::query_config())
             .configure(Routes::config)
             // default route
             .default_service(Routes::default())
